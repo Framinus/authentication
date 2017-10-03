@@ -42,3 +42,8 @@ button {
 .label {
   margin-right: 5px;
 }
+
+#errormessage {
+  color: red;
+  font-weight: bold;
+}
