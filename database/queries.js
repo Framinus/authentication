@@ -13,7 +13,6 @@ const addUser = function (name, email, password) {
   db.one(
     'INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *;', [name, email, password])
     .then(data => {
-      console.log(`Contact data successfully added`);
       return data;
     })
     .catch(err => {
@@ -26,14 +25,6 @@ const addUser = function (name, email, password) {
 const findUser = function (email) {
   return db.one(
     'SELECT * FROM users WHERE email=$1', email)
-    .then(data => {
-      console.log('successfully found user');
-      return data;
-    })
-    .catch(err => {
-      console.log('user not found');
-    });
-    // pgp.end();
 }
 
 module.exports = { addUser, findUser };
