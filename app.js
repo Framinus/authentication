@@ -48,13 +48,12 @@ app.post('/signup', (req, res) => {
   res.redirect('/');
 });
 
-// this function is not working.
 app.post('/login', (req, res) => {
-  const { email, password } = req.body;
+  const { email } = req.body;
   findUser(email)
   .then(data => {
-    console.log('Successfully found user');
-    bcrypt.compare(password, data.password).then((result) => {
+    console.log(data);
+    bcrypt.compare(data.password, password).then((result) => {
     if (result) {
       res.cookie('name', data.name);
       res.redirect('/')
