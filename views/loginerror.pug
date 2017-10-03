@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  div.loginblurb
+    p#errormessage Incorrect email or password entered. Try again.
+      form(action='login', method='post')
+        div.formgroup
+          label.label email
+          input(type='text' name='email')
+        div.formgroup
+          label.label password
+          input(type='text' name='password')
+        button.login=(type='submit')
