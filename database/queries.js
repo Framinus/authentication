@@ -11,10 +11,7 @@ const db = pgp(cn);
 
 const addUser = function (name, email, password) {
   db.one(
-    `INSERT INTO users (name, email, password)
-    VALUES ($1, $2, $3)
-    RETURNING *;
-    `, [name, email, password])
+    'INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *;', [name, email, password])
     .then(data => {
       console.log(`Contact data successfully added`);
       return data;
@@ -22,7 +19,7 @@ const addUser = function (name, email, password) {
     .catch(err => {
       console.log(err, `input not successfully entered into database`);
     });
-    pgp.end();
+    // pgp.end();
 }
 
 // this is meant to be used from the login screen. I am seeing if the user exists in the database.
@@ -36,7 +33,7 @@ const findUser = function (email) {
     .catch(err => {
       console.log('user not found');
     });
-    pgp.end();
+    // pgp.end();
 }
 
 module.exports = { addUser, findUser };
