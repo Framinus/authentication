@@ -2,8 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cookieSession = require('cookie-session');
-const path = require('path');
 const pug = require('pug');
+const bcrypt = require('bcrypt');
+const path = require('path');
 const { addUser, findUser } = require('./database/queries.js');
 
 const app = express();
@@ -39,7 +40,10 @@ app.post('/signup', (req, res) => {
   const name = req.body.name;
   const email = req.body.email;
   const password = req.body.password;
-  addUser(name, email, password);
+  const saltRounds = 10;
+  bcrypt.hash(password, saltRounds).then(function(hash) {
+    addUser(name, email, hash);
+});
   res.cookie('name', req.body.name);
   res.redirect('/');
 });
@@ -49,12 +53,18 @@ app.post('/login', (req, res) => {
   const { email, password } = req.body;
   findUser(email)
   .then(data => {
-    res.json(data);
+    bcrypt.compare(password, data.password).then((result) => {
+    if (result) {
+      res.cookie('name', data.name);
+      res.redirect('/')
+    } else {
+      res.render('loginerror');
+    }
+    })
   })
   .catch(err => {
     console.log('user not found');
   });
-
 });
 
 app.post('/logout', (req, res) => {
