@@ -53,6 +53,7 @@ app.post('/login', (req, res) => {
   const { email, password } = req.body;
   findUser(email)
   .then(data => {
+    console.log('Successfully found user');
     bcrypt.compare(password, data.password).then((result) => {
     if (result) {
       res.cookie('name', data.name);
@@ -63,6 +64,7 @@ app.post('/login', (req, res) => {
     })
   })
   .catch(err => {
+    res.render('loginerror');
     console.log('user not found');
   });
 });
