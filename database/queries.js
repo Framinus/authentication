@@ -1,3 +1,4 @@
+
 const pgp = require('pg-promise')();
 
 const cn = {
@@ -8,8 +9,6 @@ const cn = {
 
 const db = pgp(cn);
 
-// this allows me to add a new user to the database from the signup form.
-// works successfully.
 const addUser = function (name, email, password) {
   db.one(
     `INSERT INTO users (name, email, password)
@@ -28,8 +27,7 @@ const addUser = function (name, email, password) {
 
 // this is meant to be used from the login screen. I am seeing if the user exists in the database.
 const findUser = function (email) {
-  console.log(email)
-  return db.query(
+  return db.one(
     'SELECT * FROM users WHERE email=$1', email)
     .then(data => {
       console.log('successfully found user');
