@@ -1,0 +1,44 @@
+const pgp = require('pg-promise')();
+
+const cn = {
+  host: 'localhost',
+  port: 5432,
+  database: 'users',
+};
+
+const db = pgp(cn);
+
+// this allows me to add a new user to the database from the signup form.
+// works successfully.
+const addUser = function (name, email, password) {
+  db.one(
+    `INSERT INTO users (name, email, password)
+    VALUES ($1, $2, $3)
+    RETURNING *;
+    `, [name, email, password])
+    .then(data => {
+      console.log(`Contact data successfully added`);
+      return data;
+    })
+    .catch(err => {
+      console.log(err, `input not successfully entered into database`);
+    });
+    pgp.end();
+}
+
+// this is meant to be used from the login screen. I am seeing if the user exists in the database.
+const findUser = function (email) {
+  console.log(email)
+  return db.query(
+    'SELECT * FROM users WHERE email=$1', email)
+    .then(data => {
+      console.log('successfully found user');
+      return data;
+    })
+    .catch(err => {
+      console.log('user not found');
+    });
+    pgp.end();
+}
+
+module.exports = { addUser, findUser };

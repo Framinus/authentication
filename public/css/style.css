@@ -1,0 +1,44 @@
+button {
+  height: 30px;
+  width: 70px;
+}
+
+.header-container {
+  margin: 20px;
+  text-align: center;
+}
+
+.main-container {
+  margin: 40px;
+  text-align: center;
+}
+
+.blurb {
+  font-size: 20px;
+}
+
+.signupblurb {
+  font-size: 20px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.fineprint {
+  font-size: 10px;
+  font-style: italic;
+  text-align: center;
+}
+
+.footer {
+  text-align: center;
+}
+
+.formgroup {
+  margin: 10px;
+}
+
+.label {
+  margin-right: 5px;
+}

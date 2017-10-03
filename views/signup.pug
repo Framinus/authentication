@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  div.signupblurb
+    p You're new around here! Fill out the form below to get started.
+   
+  div.signupform
+    form(action='/signup', method='post')
+      div.formgroup
+        label.label name
+        input(type='text' name='name')
+      div.formgroup
+        label.label email
+        input(type='text' name='email')
+      div.formgroup
+        label.label password
+        input(type='text' name='password')
+      button.login=(type='submit')
+  
+      
+      

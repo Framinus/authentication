@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  
+  p If you have been here before, please log in. Otherwise, sign up! We promise you no spam. 
+  
+  div.choicebuttons
+    div.formgroup
+      form(action='/login', method='get')
+        button#login(type='submit') Login
+    div.formgroup
+      form(action='/signup', method='get')
+        button#signup(type='submit') Signup
+  
+  div.fineprint
+    p We are totally going to spam you. 

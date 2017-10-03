@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  div.success 
+    p Look at you, #{name}! You're logged in. Good work. Now go on ahead and log out.
+  div.logout
+    form(action='/logout', method='post')
+      button#logout(type='submit') Logout

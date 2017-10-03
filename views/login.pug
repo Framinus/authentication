@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  div.loginblurb
+    p You've been here before, but we don't know who you are. Remind us.
+      form(action='login', method='post')
+        div.formgroup
+          label.label email
+          input(type='text' name='email')
+        div.formgroup
+          label.label password
+          input(type='text' name='password')
+        button.login=(type='submit')
+        
+        
